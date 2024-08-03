@@ -1,0 +1,170 @@
+<html>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body, html {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        h1 {
+            margin-bottom: 25px;
+            text-align: center;
+            color: #2c3e50; /* Changed color */
+            font-size: 28px; /* Increased font size */
+            font-weight: 700; /* Increased font weight */
+            letter-spacing: 0.5px; /* Added letter spacing */
+            text-transform: uppercase; /* Made text uppercase */
+            border-bottom: 3px solid #3498db; /* Added bottom border */
+            padding-bottom: 10px;
+            position: relative; /* For pseudo-element positioning */
+        }
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            width: 50px;
+            height: 3px;
+            background-color: #e74c3c;
+            transform: translateX(-50%);
+        }
+        
+        
+        .frm {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        label {
+            flex: 0 0 40%;
+            margin-right: 10px;
+            text-align: right;
+            color: #555;
+        }
+        
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .card .btt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        button {
+            width: 40%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        h2 {
+            margin-top: 25px;
+            text-align: center;
+            color: #2c3e50; /* Changed color */
+            font-size: 20px; /* Adjusted font size */
+            font-weight: 600; /* Increased font weight */
+            padding: 10px;
+            background-color: #ecf0f1; /* Added background color */
+            border-radius: 8px; /* Added border-radius */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added subtle shadow */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <body>
+        <div class="card">
+            <h1>Fire Weather Index (FWI) Prediction</h1>
+        
+            <form class="frm" action="{{ url_for('predict_datapoint')}}" method="post">
+                <div class="form-group">
+                    <label for="Temperature">Temperature(in degree Celsius):</label>
+                    <input type="text" id="Temperature" name="Temperature" placeholder="Enter temperature" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="RH">Relative Humidity (RH in %):</label>
+                    <input type="text" id="RH" name="RH" placeholder="Enter RH" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="Ws">Wind Speed(WS in km/h):</label>
+                    <input type="text" id="Ws" name="Ws" placeholder="Enter wind speed" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="Rain">Rain(in mm):</label>
+                    <input type="text" id="Rain" name="Rain" placeholder="Enter rainfall" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="FFMC">Fine Fuel Moisture Code Index:</label>
+                    <input type="text" id="FFMC" name="FFMC" placeholder="Enter FFMC" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="DMC">Duff Moisture Code Index:</label>
+                    <input type="text" id="DMC" name="DMC" placeholder="Enter DMC" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="ISI">Initial Spread Index:</label>
+                    <input type="text" id="ISI" name="ISI" placeholder="Enter ISI" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="Classes">Classes(0: Not Fire , 1: Fire):</label>
+                    <input type="text" id="Classes" name="Classes" placeholder="Enter classes" required="required">
+                </div>
+                
+                <div class="form-group">
+                    <label for="Region">Region(0: Bejaia region ,1: Sidi Bel-abbes Region):</label>
+                    <input type="text" id="Region" name="Region" placeholder="Enter region" required="required">
+                </div>
+        
+                <div class="btt">
+                    <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+                </div>
+            </form>
+            <h2>
+                THE FWI prediction is {{result}}
+            </h2>
+        </div>
+       <body>
+    </html>
